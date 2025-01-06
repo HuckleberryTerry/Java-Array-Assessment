@@ -1,0 +1,32 @@
+//========================================================
+//PARTIAL IMPORTS
+//========================================================
+
+//========================================================
+//UTILITIES:- VARIABLES, MIXINS AND FUNCTIONS
+//========================================================
+@import 'utilities/variables',
+        'utilities/mixins',
+        'utilities/functions';
+//========================================================
+//BASE STYLES:- RESET, BASE AND FONT STYLES
+//========================================================
+@import 'base/reset',
+        'base/base',
+        'base/fonts';
+//========================================================
+//LAYOUT STYLES:- THE LAYOUT OF SECTIONS
+//========================================================
+@import 'layout/header',
+        'layout/hero',
+        'layout/projects',
+        'layout/footer',
+        'layout/middle';
+//========================================================
+//COMPONENT STYLES:- THE LAYOUT OF COMPONENTS
+//========================================================
+@import 'components/buttons',
+        'components/form',
+        'components/icons',
+        'components/images',
+        'components/nav';
