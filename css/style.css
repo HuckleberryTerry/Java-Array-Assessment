@@ -690,4 +690,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+#middle .image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 10px;
+  padding: 10px 10px;
+  width: 475px;
+  height: 475px;
+  box-shadow: 0 0 5px black;
+}
+#middle .form-container {
+  margin: 10px;
 }/*# sourceMappingURL=style.css.map */
