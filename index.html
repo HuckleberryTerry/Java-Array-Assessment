@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div id="header" class="container">
+        <div id="header">
             <div class="header-wrapper">
                 <h2 class="header-title">
                     Javascript Array Assessment
@@ -19,20 +19,41 @@
         <div id="middle" class="container">
             <div class="image-wrapper">
                 <!-- <img src="https://picsum.photos/seed/picsum/450/450"> -->
+                
+                <div class="form-container">
+                    <form>
+                        <input id="email" type="text" name="email" placeholder="Email Address" required autocomplete="off">
+                        <input class="btn btn-submit" type="submit" value="Submit">
+                    </form>
+                    <p>Please Enter your Email to save images to a collection</p>
+                </div>
+
+                <div class="image-controls">
+                    <a href="#" onClick="generateNewImage()">New Image</a>
+                    <select class="options">
+                        <option>default</option>
+                    </select>
+                    <a href="#collections" onClick="saveImage()">Add Image</a>
+                </div>
+
             </div>
-            <div class="form-container">
-                <form>
-                    <input id="email" type="text" name="email" placeholder="Email Address" required>
-                    <input class="btn btn-submit" type="submit" value="Submit">
-                </form>
+
+            <div class="collections" id="collections">
+                <h2>Images</h2>
+                <div class="collections-images">
+
+                </div>
+                <div class="collections-controls">
+                    <a href="#" onClick="saveToCollection()">Save Collection</a>
+                    <a href="#" onClick="deleteSelectedImage()">Delete Image</a>
+                    <a href="#" onClick="deleteCollection()">Delete Collection</a>
+                </div>
+                <h2>Collections</h2>
+                <div class="collections-stored">
+
+                </div>
             </div>
-            <div class="image-controls">
-                <a href="#">New Image</a>
-                <a href="#">Save Image</a>
-                <select class="options">
-                    <option>default</option>
-                </select>
-            </div>
+
         </div>
 
         <script src="js/jquery-3.7.1.min.js"></script>
