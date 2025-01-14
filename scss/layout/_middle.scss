@@ -60,7 +60,7 @@
             &>img{
                 display:flex;
                 flex-direction: row;
-                width:22%;
+                width:46%;
                 margin:5px;
             }    
         }
@@ -90,30 +90,46 @@
             }
         }
         &-stored{
-            .collections-container{
-                display:flex;
-                flex-wrap: wrap;
-                flex-direction: row;
-                justify-content:center;
-                width:25%;
-                margin-top:10px;
-                &>a{
-                    text-decoration:none;
-                    border-radius:0 0 20px 20px;
-                    background-color:#8bc2bf;
-                    box-shadow: 0 0 5px #000;
-                    &>img{
-                        display:flex;
-                        flex-wrap: wrap;
-                        flex-direction: row;
-                        justify-content:center;
-                        width:100%;
-                    }
-                    &>p{
-                        text-align: center;
-                    }
+            width:100%;
+            display:flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-direction: row;
+            &>a{
+                width:48%;
+                margin:5px 5px 0 0;
+                &>img{
+                    width:100%;
+                    height:100%;
                 }
             }
+            & .removable{
+                display:none;
+            }
+            // .collections-container{
+            //     display:flex;
+            //     flex-wrap: wrap;
+            //     flex-direction: row;
+            //     justify-content:center;
+            //     width:25%;
+            //     margin-top:10px;
+            //     &>a{
+            //         text-decoration:none;
+            //         border-radius:0 0 20px 20px;
+            //         background-color:#8bc2bf;
+            //         box-shadow: 0 0 5px #000;
+            //         &>img{
+            //             display:flex;
+            //             flex-wrap: wrap;
+            //             flex-direction: row;
+            //             justify-content:center;
+            //             width:100%;
+            //         }
+            //         &>p{
+            //             text-align: center;
+            //         }
+            //     }
+            // }
         }
     }
 

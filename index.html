@@ -45,10 +45,11 @@
                 </div>
                 <div class="collections-controls">
                     <a href="#" onClick="saveToCollection()">Save Collection</a>
-                    <a href="#" onClick="deleteSelectedImage()">Delete Image</a>
-                    <a href="#" onClick="deleteCollection()">Delete Collection</a>
+                    <!-- <a href="#" onClick="deleteSelectedImage(selectedImageArr, userArray)">Delete Image</a> -->
+                    <a href="#" onClick="deleteCollection(userArray)">Delete Collection</a>
+                    <a href="#" onClick="getUserImages(userArray)">View Collection</a>
                 </div>
-                <h2>Collections</h2>
+                <h2 id="collections-title">Collections</h2>
                 <div class="collections-stored">
 
                 </div>
