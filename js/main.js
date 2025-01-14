@@ -234,6 +234,6 @@ function deleteSelectedImage(arr1, arr2){
 
 // - Add in a delete button that allows a user to delete collections/images in a collection.
 //   This should be a simple get function that matches an image id with another in the array
-//   and then deletes the matching entry. !---in progress---!
+//   and then deletes the matching entry. !---Completed---!
 
  
