@@ -1,34 +1,27 @@
 const $form_Email = $('#email');
 const $form_Submit = $('.btn-submit');
-const $email_List = $('.options');
+let $email_List = $('.options');
 const $image_Wrapper = $('.image-wrapper');
 const $collections_Images = $('.collections-images');
 const $collections_Stored = $('.collections-stored');
 const input_Email = document.querySelector('input[name="email"]');
-let $currentUser = '';
-
-let userArray = [{
-        emailAddress: '',
-        imageSources: [],
-}];
-let collectionNo = 0;
-let collectionUserNo = 0;
-
 let emailArray = [];
 let isValidEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+let userArray = [];
+let collectionNo = 0;
+let collectionUserNo = 0;
 
 $(document).ready(function(){
     var rand = Math.floor(Math.random() * 100);
     var deviceWidth = window.innerWidth - 50;
-    //console.log(rand);
+    console.log(rand);
     var img = `<img class="new-image" src="https://picsum.photos/id/${rand}/${deviceWidth}/700">`;
     //$image_Wrapper.append(img);
     $image_Wrapper.prepend(img);
 })
 
-
 $email_List.on('click', function(event){
-    let msg = emailArray.find((element) => element == `${$email_List.val()}`);
+    //let msg = emailArray.find((element) => element == `${$email_List.val()}`);
     //console.log($currentUser.val());
     getUserImages(userArray);
 });
@@ -37,27 +30,27 @@ $form_Submit.on('click', function(event){
     if(isValidEmail.test($form_Email.val()) && !isEmailExist(emailArray)){
         var text = $form_Email.val();
         emailArray.push(text);
-        //console.log(emailArray);
-        var option = `<option selected="selected" class="user-${text.replace(/[^a-zA-Z0-9 ]/g, "")}"> ${text} </option>`;
+        console.log(emailArray);
+        var option = `<option selected> ${text} </option>`;
         $form_Email.val('');
         $email_List.append(option);
         $form_Email.attr('oninvalid', 'this.setCustomValidity("Email Has Been Uploaded")');
         $form_Email.attr('oninput', ' ');
-        ////console.log(text);
+        //console.log(text);
         //event.preventDefault();
     }
-    else if(isValidEmail.test($form_Email.val()) && isEmailExist){
+    else if(isValidEmail.test($form_Email.val()) && isEmailExist(emailArray)){
         //alert('You have entered an existing email, please select from the list below.');
         $form_Email.attr('oninvalid', 'this.setCustomValidity("Email Already Exists")');
         $form_Email.attr('oninput', ' ');
         //event.preventDefault();
     }
     else{
-        ////console.log('False');
+        //console.log('False');
         // var text = $form_Email.val();
         // var option = `<option> ${text} </option>`;
         // $email_List.append(option);
-        // //console.log(text);
+        // console.log(text);
         //alert('Incorrect Email has been entered. Please enter a valid email address');
         $form_Email.attr('oninvalid', 'this.setCustomValidity("Email is Invalid")');
         $form_Email.attr('oninput', ' ');
@@ -74,6 +67,39 @@ function isEmailExist(email){
     }
 }
 
+function isImageExists(arr, email, src){
+    //use a for loop to iterate through userArray to get the image sources.
+    //while the for loop accesses the imageSources, check if the current image matches any of those sources,
+    //if any sources match, return true
+    //else return false
+    for(let key in arr){
+        if(typeof arr[key] === "object"){
+            for (let nestedKey in arr[key]) {
+                //console.log(arr[key][nestedKey].length);
+                // console.log(arr[key][nestedKey].imageSources.length);
+                console.log(arr[key]);
+                if('imageSources' in arr[key][nestedKey]){
+                    for(let i = 0; i < arr[key].length; i++){
+                        console.log(arr[i]);
+                        if(arr[key][nestedKey].imageSources.includes(src) && arr[key][nestedKey].emailAddress.includes(email)){
+                            console.log(`match on ${email} and ${src}`);
+                            return true;
+                        }
+                        else{
+                            console.log(arr[i][nestedKey].emailAddress);
+                            console.log("mismatch");
+                            return false;
+                        }
+                    }
+                }
+            }
+        } 
+        else {
+            //console.log(array[key]);
+        }
+    }
+}
+
 function generateNewImage(){
     const $newImage = $('.new-image');
     var rand = Math.floor(Math.random() * (1081 - 1) + 1);
@@ -82,51 +108,24 @@ function generateNewImage(){
     $newImage.attr('src', randomImage);
 }
 
-function isImageExists(arr, src){
-    //use a for loop to iterate through userArray to get the image sources.
-    //while the for loop accesses the imageSources, check if the current image matches any of those sources,
-    //if any sources match, return true
-    //else return false
-
-    for(let key in arr){
-        if(typeof arr[key] === "object"){
-            for (let nestedKey in arr[key]) {
-                ////console.log(arr[key][nestedKey]);
-                // //console.log(arr[key][nestedKey].imageSources.length);
-                if('imageSources' in arr[key][nestedKey]){
-                    for(let i = 0; i < arr[key][nestedKey].imageSources.length; i++){
-                        ////console.log(arr[key][nestedKey].imageSources[i]);
-                        if(arr[key][0].imageSources == src){
-                            ////console.log(arr[key][0].emailAddress);
-                            return true;
-                        }
-                        else{
-                            return false;
-                        }
-                    }
-                }
-            }
-        } 
-        else {
-            ////console.log('Does not Exist');
-        }
-    }
-
-}
-
 let tempArray=[];
 function saveImage(){
     const $newImage = $('.new-image');
     let imageExists = tempArray.find((element) => element == $newImage.attr('src'));
+    let $email_List = $('.options');
     ////console.log(imageExists);
     if($email_List.val() === 'default'){
         ////console.log('Default Detected');
         $('.error').hide();
         $image_Wrapper.append(`<p class="error">Error: You haven't entered a valid email, please enter an email to save images to a collection</p>`)
     }
-    else if(imageExists || isImageExists(userArray, $newImage.attr('src'))){
+    else if(imageExists){
+        console.log('already exists');
         //console.log('Already Exists');
         //Add code that tells the user that this image already exists in the collection.
+    }
+    else if(isImageExists(userArray, $email_List.val(), $newImage.attr('src')) === true){
+        console.log('Already exists in Array');
     }
     else{
         $('.error').hide();
@@ -140,48 +139,15 @@ function saveImage(){
         //generateNewImage();
     }
     //console.log(userArray);
-}
-
-function isEmailExistCollection(arr, email){
-    for(let key in arr){
-        if(typeof arr[key] === "object"){
-            for (let nestedKey in arr[key]) {
-                //console.log(arr[key][nestedKey]);
-                //console.log(arr[key][nestedKey].emailAddress);
-                for(let i=0; i < arr[key][nestedKey].emailAddress.length; i++){
-                    if(arr[key][nestedKey].emailAddress === email){
-                        //console.log(arr[key][nestedKey]);
-                        return arr[key][nestedKey];
-                        //break;
-                    }
-                    else{
-                        console.log('mismatch');
-                    }
-                    //console.log(arr[key][nestedKey].emailAddress);
-                }
-            }
-        } 
-        else {
-            //console.log(array[key]);
-        }
-    }
+    //isImageExists(userArray, $newImage.attr('src'));
+    //console.log(userArray);
 }
 
 function saveToCollection(){
     const $newImage = $('.new-image');
     let tempImg = $newImage.attr('src');
-    ////console.log($email_List.val());
-    //userArray.push([{emailAddress:$email_List.val(), imageSources:tempArray}]);
-    if(userArray){
-
-    }
-    userArray.push([{emailAddress:$email_List.val()}]);
-    for(let i = 0; i < tempArray.length; i++){
-        console.log(tempArray[i]);
-        console.log(`loop has run ${i} times.`);
-    }
-    isEmailExistCollection(userArray, $email_List.val());
-    // console.log(userArray.find((element) => element == tempImg));
+    //console.log($email_List.val());
+    userArray.push([{emailAddress:$email_List.val(), imageSources:tempArray}]);
     console.log(userArray);
     // $collections_Stored.append(`<div class='${collectionNo}-collection collections-container'>
     //                                 <a href='#'>
@@ -190,32 +156,20 @@ function saveToCollection(){
     //                                 </a>
     //                             </div>`);
     //console.log(userArray);
-
-    isEmailExistCollection(userArray, $email_List.val());
-
     collectionNo += 1;
     $collections_Images.children().remove();
-    $collections_Stored.show(); 
+    tempArray = [];
+    $collections_Stored.show();
 }
 
 setInterval(function(){
     if(tempArray.length < 1 || tempArray == undefined){
-        console.log('array empty');
+        console.log('Array Empty');
     }
     else{
         saveToCollection();
-        tempArray = [];
     }
-    setCurrentUser();
-}, 30000);
-
-function setCurrentUser(){
-    $txt = $email_List.val();
-    $currentUser = $(`.user-${$txt.replace(/[^a-zA-Z0-9 ]/g, "")}`);
-    //console.log($currentUser.val());
-    getUserImages(userArray);
-    return $currentUser;
-}
+}, 15000);
 
 function getUserImages(arr){
     $collections_Stored.children().remove();
@@ -272,7 +226,7 @@ function selectedImage(){
     // console.log($collectionSavedImage.attr('src'));
     // selectedImageArr.push($collectionSavedImage.attr('src'));
     // console.log(selectedImageArr);
-    //console.log($collectionSavedImage);
+    console.log($collectionSavedImage);
 }
 
 function deleteCollection(arr){
@@ -292,12 +246,12 @@ function deleteCollection(arr){
                     // let $email_List_Selected = $('.options :selected');
                     // $email_List_Selected.remove();
                     $collections_Stored.children().remove();
-                    //console.log(arr[key]);
+                    console.log(arr[key]);
                 }
                 else{
-                    //console.log('mismatch');
+                    console.log('mismatch');
                 }
-                //console.log(arr[key]);
+                console.log(arr[key]);
               }
         } 
         else {
@@ -305,6 +259,12 @@ function deleteCollection(arr){
         }
     }
 }
+
+// setInterval(function(){
+//     if(){
+
+//     }
+// }, 15000);
 
 function deleteSelectedImage(arr1, arr2){
     //console.log(arr1);
