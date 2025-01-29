@@ -75,12 +75,11 @@ function isImageExists(arr, email, src){
     for(let key in arr){
         if(typeof arr[key] === "object"){
             for (let nestedKey in arr[key]) {
-                //console.log(arr[key][nestedKey].length);
+                console.log(arr[key][nestedKey].length);
                 // console.log(arr[key][nestedKey].imageSources.length);
-                console.log(arr[key]);
                 if('imageSources' in arr[key][nestedKey]){
                     for(let i = 0; i < arr[key].length; i++){
-                        console.log(arr[i]);
+                        //console.log(arr.length);
                         if(arr[key][nestedKey].imageSources.includes(src) && arr[key][nestedKey].emailAddress.includes(email)){
                             console.log(`match on ${email} and ${src}`);
                             return true;
@@ -112,7 +111,7 @@ let tempArray=[];
 function saveImage(){
     const $newImage = $('.new-image');
     let imageExists = tempArray.find((element) => element == $newImage.attr('src'));
-    let $email_List = $('.options');
+    $email_List = $('.options');
     ////console.log(imageExists);
     if($email_List.val() === 'default'){
         ////console.log('Default Detected');
@@ -139,7 +138,7 @@ function saveImage(){
         //generateNewImage();
     }
     //console.log(userArray);
-    //isImageExists(userArray, $newImage.attr('src'));
+    isImageExists(userArray, $newImage.attr('src'));
     //console.log(userArray);
 }
 
@@ -164,7 +163,7 @@ function saveToCollection(){
 
 setInterval(function(){
     if(tempArray.length < 1 || tempArray == undefined){
-        console.log('Array Empty');
+        getUserImages(userArray);
     }
     else{
         saveToCollection();

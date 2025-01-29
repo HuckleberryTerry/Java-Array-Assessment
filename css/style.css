@@ -697,6 +697,18 @@ body {
     align-items: flex-start;
   }
   #middle .image-wrapper {
+    width: 100%;
+  }
+  #middle .collections {
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  #middle {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  #middle .image-wrapper {
     width: 50%;
   }
   #middle .collections {

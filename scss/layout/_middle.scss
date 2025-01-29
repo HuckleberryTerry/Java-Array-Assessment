@@ -10,12 +10,23 @@
         flex-direction: row;
         align-items:flex-start;
         .image-wrapper{
+            width:100%;
+        }
+        .collections{
+            width:100%;
+        }
+    }
+    @include mq('l'){
+        flex-direction: row;
+        align-items:flex-start;
+        .image-wrapper{
             width:50%;
         }
         .collections{
             width:50%;
         }
     }
+
     .image-wrapper{
         display:flex;
         flex-direction:column;
