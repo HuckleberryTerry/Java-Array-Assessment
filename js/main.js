@@ -79,13 +79,12 @@ function isImageExists(arr, email, src){
                 // console.log(arr[key][nestedKey].imageSources.length);
                 if('imageSources' in arr[key][nestedKey]){
                     for(let i = 0; i < arr[key].length; i++){
-                        //console.log(arr.length);
-                        if(arr[key][nestedKey].imageSources.includes(src) && arr[key][nestedKey].emailAddress.includes(email)){
+                        console.log(arr.length);
+                        if(arr[key][nestedKey].imageSources[i].includes(src)){
                             console.log(`match on ${email} and ${src}`);
                             return true;
                         }
                         else{
-                            console.log(arr[i][nestedKey].emailAddress);
                             console.log("mismatch");
                             return false;
                         }
@@ -163,12 +162,12 @@ function saveToCollection(){
 
 setInterval(function(){
     if(tempArray.length < 1 || tempArray == undefined){
-        getUserImages(userArray);
+        console.log('Array Empty');
     }
     else{
         saveToCollection();
     }
-}, 1000);
+}, 15000);
 
 function getUserImages(arr){
     $collections_Stored.children().remove();

@@ -788,6 +788,9 @@ body {
   align-items: center;
   justify-content: center;
 }
+#middle .collections-controls > a:hover {
+  box-shadow: 0 0 5px #8bc2bf;
+}
 #middle .collections-stored {
   width: 100%;
   display: flex;
@@ -829,6 +832,9 @@ body {
   border-right: 0px;
   padding-left: 10px;
 }
+#middle .form-container #email:focus-visible {
+  outline: 1px solid #8bc2bf;
+}
 #middle .form-container .btn-submit {
   background-color: #8bc2bf;
   color: rgb(255, 255, 255);
@@ -837,6 +843,9 @@ body {
   padding-right: 10px;
   float: right;
   height: 30px;
+}
+#middle .form-container .btn-submit:hover {
+  box-shadow: 0 0 5px #8bc2bf;
 }
 #middle .image-controls {
   display: flex;
@@ -860,6 +869,9 @@ body {
   align-items: center;
   justify-content: center;
 }
+#middle .image-controls > a:hover {
+  box-shadow: 0 0 5px #8bc2bf;
+}
 #middle .image-controls > select {
   text-align: center;
   text-decoration: none;
@@ -875,4 +887,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#middle .image-controls > select:hover {
+  box-shadow: 0 0 5px #8bc2bf;
 }/*# sourceMappingURL=style.css.map */
