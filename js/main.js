@@ -169,7 +169,7 @@ setInterval(function(){
     else{
         saveToCollection();
     }
-}, 15000);
+}, 1000);
 
 function getUserImages(arr){
     $collections_Stored.children().remove();
